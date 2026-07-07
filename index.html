@@ -16,7 +16,6 @@
       padding: 20px;
     }
 
-    /* ─── Section Title ─── */
     .section-title {
       font-size: 15px;
       font-weight: 600;
@@ -35,7 +34,6 @@
       border-radius: 2px;
     }
 
-    /* ─── Panel ─── */
     .panel {
       background: #fff;
       border-radius: 12px;
@@ -44,7 +42,7 @@
       margin-bottom: 16px;
     }
 
-    /* ─── Block 1: Overview Cards ─── */
+    /* ── Overview Cards ── */
     .overview-header {
       display: flex;
       justify-content: space-between;
@@ -65,133 +63,55 @@
       transition: box-shadow .2s;
     }
     .card:hover { box-shadow: 0 2px 10px rgba(79,110,247,.12); }
-    .card-label {
-      font-size: 12px;
-      color: #888;
-      margin-bottom: 6px;
-    }
-    .card-value {
-      font-size: 22px;
-      font-weight: 700;
-      color: #2c3e7a;
-      line-height: 1.2;
-    }
-    .card-unit {
-      font-size: 12px;
-      color: #aaa;
-      margin-top: 2px;
-    }
-    .card-trend {
-      font-size: 11px;
-      margin-top: 6px;
-      padding: 2px 6px;
-      border-radius: 20px;
-      display: inline-block;
-    }
+    .card-label { font-size: 12px; color: #888; margin-bottom: 6px; }
+    .card-value { font-size: 22px; font-weight: 700; color: #2c3e7a; line-height: 1.2; }
+    .card-unit  { font-size: 12px; color: #aaa; margin-top: 2px; }
+    .card-trend { font-size: 11px; margin-top: 6px; padding: 2px 6px; border-radius: 20px; display: inline-block; }
     .trend-up   { background: #e8f5e9; color: #388e3c; }
     .trend-down { background: #fce4ec; color: #c62828; }
 
-    /* Edit mode for cards */
-    .card.editing .card-value { display: none; }
-    .card.editing .card-edit-input { display: block; }
+    /* card edit mode */
+    .card.editing .card-value       { display: none; }
+    .card.editing .card-edit-input  { display: block; }
     .card-edit-input {
-      display: none;
-      width: 100%;
-      font-size: 20px;
-      font-weight: 700;
-      color: #2c3e7a;
-      border: none;
-      border-bottom: 2px solid #4f6ef7;
-      background: transparent;
-      outline: none;
-      padding: 2px 0;
+      display: none; width: 100%; font-size: 20px; font-weight: 700; color: #2c3e7a;
+      border: none; border-bottom: 2px solid #4f6ef7; background: transparent; outline: none; padding: 2px 0;
     }
+    .card.editing .card-label-text  { display: none; }
     .card.editing .card-label-input { display: block; }
-    .card.editing .card-label-text { display: none; }
     .card-label-input {
-      display: none;
-      width: 100%;
-      font-size: 12px;
-      color: #888;
-      border: none;
-      border-bottom: 1px dashed #ccc;
-      background: transparent;
-      outline: none;
-      padding: 1px 0;
-      margin-bottom: 4px;
+      display: none; width: 100%; font-size: 12px; color: #888;
+      border: none; border-bottom: 1px dashed #ccc; background: transparent; outline: none; padding: 1px 0; margin-bottom: 4px;
     }
-    .card.editing .card-unit-input { display: block; }
-    .card.editing .card-unit-text { display: none; }
+    .card.editing .card-unit-text   { display: none; }
+    .card.editing .card-unit-input  { display: block; }
     .card-unit-input {
-      display: none;
-      width: 100%;
-      font-size: 12px;
-      color: #aaa;
-      border: none;
-      border-bottom: 1px dashed #ccc;
-      background: transparent;
-      outline: none;
-      padding: 1px 0;
+      display: none; width: 100%; font-size: 12px; color: #aaa;
+      border: none; border-bottom: 1px dashed #ccc; background: transparent; outline: none; padding: 1px 0;
     }
-    .card.editing .card-trend { display: none; }
+    .card.editing .card-trend       { display: none; }
     .card.editing .card-trend-input { display: block; }
     .card-trend-input {
-      display: none;
-      width: 100%;
-      font-size: 11px;
-      border: none;
-      border-bottom: 1px dashed #ccc;
-      background: transparent;
-      outline: none;
-      padding: 1px 0;
-      margin-top: 4px;
-      color: #555;
+      display: none; width: 100%; font-size: 11px;
+      border: none; border-bottom: 1px dashed #ccc; background: transparent; outline: none; padding: 1px 0; margin-top: 4px; color: #555;
     }
-
-    /* Add/Remove card buttons */
     .card-add-btn {
-      background: #f0f3ff;
-      border: 2px dashed #c5cef7;
-      border-radius: 10px;
-      padding: 14px 16px;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: #7a8fd4;
-      font-size: 24px;
-      transition: background .2s;
-      min-height: 90px;
+      background: #f0f3ff; border: 2px dashed #c5cef7; border-radius: 10px;
+      padding: 14px 16px; cursor: pointer; display: flex; align-items: center; justify-content: center;
+      color: #7a8fd4; font-size: 24px; transition: background .2s; min-height: 90px;
     }
     .card-add-btn:hover { background: #e4e9ff; }
     .card-remove-btn {
-      position: absolute;
-      top: 6px;
-      right: 6px;
-      width: 18px;
-      height: 18px;
-      background: #ff5252;
-      color: #fff;
-      border: none;
-      border-radius: 50%;
-      font-size: 12px;
-      cursor: pointer;
-      display: none;
-      align-items: center;
-      justify-content: center;
-      line-height: 1;
+      position: absolute; top: 6px; right: 6px; width: 18px; height: 18px;
+      background: #ff5252; color: #fff; border: none; border-radius: 50%;
+      font-size: 12px; cursor: pointer; display: none; align-items: center; justify-content: center; line-height: 1;
     }
     .card.editing .card-remove-btn { display: flex; }
 
-    /* ─── Buttons ─── */
+    /* ── Buttons ── */
     .btn {
-      padding: 6px 16px;
-      border-radius: 6px;
-      font-size: 13px;
-      cursor: pointer;
-      border: none;
-      font-weight: 500;
-      transition: opacity .2s;
+      padding: 6px 16px; border-radius: 6px; font-size: 13px;
+      cursor: pointer; border: none; font-weight: 500; transition: opacity .2s;
     }
     .btn:hover { opacity: .85; }
     .btn-primary { background: #4f6ef7; color: #fff; }
@@ -199,116 +119,76 @@
     .btn-success { background: #43a047; color: #fff; }
     .btn-sm { padding: 4px 12px; font-size: 12px; }
 
-    /* ─── Block 2: Tab Chart ─── */
+    /* ── Tab Chart ── */
     .tab-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 16px;
+      display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;
     }
     .tabs {
-      display: flex;
-      gap: 4px;
-      background: #f0f2f8;
-      border-radius: 8px;
-      padding: 4px;
+      display: flex; gap: 4px; background: #f0f2f8; border-radius: 8px; padding: 4px;
     }
     .tab-btn {
-      padding: 6px 16px;
-      border-radius: 6px;
-      font-size: 13px;
-      cursor: pointer;
-      border: none;
-      background: transparent;
-      color: #666;
-      font-weight: 500;
-      transition: all .2s;
+      padding: 6px 16px; border-radius: 6px; font-size: 13px;
+      cursor: pointer; border: none; background: transparent; color: #666; font-weight: 500; transition: all .2s;
     }
-    .tab-btn.active {
-      background: #fff;
-      color: #4f6ef7;
-      box-shadow: 0 1px 4px rgba(0,0,0,.1);
-    }
+    .tab-btn.active { background: #fff; color: #4f6ef7; box-shadow: 0 1px 4px rgba(0,0,0,.1); }
     .tab-content { display: none; }
     .tab-content.active { display: block; }
+    .chart-wrap { position: relative; height: 280px; }
 
-    .chart-wrap {
-      position: relative;
-      height: 260px;
+    /* axis legend */
+    .axis-legend {
+      display: flex; gap: 20px; justify-content: center; margin-bottom: 8px; flex-wrap: wrap;
     }
+    .axis-legend-item {
+      display: flex; align-items: center; gap: 5px; font-size: 12px; color: #666;
+    }
+    .axis-legend-dot {
+      width: 10px; height: 10px; border-radius: 50%;
+    }
+    .axis-label-left  { font-size: 11px; color: #4f6ef7; margin-bottom: 4px; text-align: left; }
+    .axis-label-right { font-size: 11px; color: #ef5350; margin-bottom: 4px; text-align: right; }
+    .axis-labels-row  { display: flex; justify-content: space-between; }
 
-    /* ─── Edit Modal ─── */
+    /* ── Edit Modal ── */
     .modal-overlay {
-      display: none;
-      position: fixed;
-      inset: 0;
-      background: rgba(0,0,0,.4);
-      z-index: 1000;
-      align-items: center;
-      justify-content: center;
+      display: none; position: fixed; inset: 0; background: rgba(0,0,0,.4);
+      z-index: 1000; align-items: center; justify-content: center;
     }
     .modal-overlay.open { display: flex; }
     .modal {
-      background: #fff;
-      border-radius: 14px;
-      padding: 28px 32px;
-      width: 480px;
-      max-width: 95vw;
+      background: #fff; border-radius: 14px; padding: 28px 32px;
+      width: 520px; max-width: 95vw; max-height: 90vh; overflow-y: auto;
       box-shadow: 0 8px 40px rgba(0,0,0,.18);
     }
-    .modal-title {
-      font-size: 16px;
-      font-weight: 600;
-      margin-bottom: 20px;
-      color: #222;
+    .modal-title { font-size: 16px; font-weight: 600; margin-bottom: 6px; color: #222; }
+    .modal-hint  { font-size: 12px; color: #aaa; margin-bottom: 16px; }
+    .modal-series-title {
+      font-size: 13px; font-weight: 600; color: #333;
+      margin: 14px 0 8px; display: flex; align-items: center; gap: 8px;
     }
-    .modal-row {
-      display: flex;
-      align-items: center;
-      margin-bottom: 12px;
-      gap: 10px;
+    .modal-months-grid {
+      display: grid; grid-template-columns: repeat(6, 1fr); gap: 8px; margin-bottom: 4px;
     }
-    .modal-row label {
-      width: 48px;
-      font-size: 13px;
-      color: #555;
-      flex-shrink: 0;
+    .modal-month-cell { display: flex; flex-direction: column; gap: 3px; }
+    .modal-month-cell label { font-size: 11px; color: #aaa; text-align: center; }
+    .modal-month-cell input {
+      padding: 6px 4px; border: 1px solid #dde1f0; border-radius: 6px;
+      font-size: 13px; text-align: center; outline: none; width: 100%;
     }
-    .modal-row input {
-      flex: 1;
-      padding: 7px 10px;
-      border: 1px solid #dde1f0;
-      border-radius: 6px;
-      font-size: 13px;
-      outline: none;
-      transition: border-color .2s;
-    }
-    .modal-row input:focus { border-color: #4f6ef7; }
-    .modal-footer {
-      display: flex;
-      justify-content: flex-end;
-      gap: 10px;
-      margin-top: 20px;
-    }
-    .modal-hint {
-      font-size: 12px;
-      color: #aaa;
-      margin-bottom: 16px;
-    }
+    .modal-month-cell input:focus { border-color: #4f6ef7; }
+    .modal-footer { display: flex; justify-content: flex-end; gap: 10px; margin-top: 20px; }
 
-    /* ─── Responsive ─── */
     @media (max-width: 480px) {
       body { padding: 12px; }
       .cards-grid { grid-template-columns: repeat(2, 1fr); }
       .modal { padding: 20px 16px; }
+      .modal-months-grid { grid-template-columns: repeat(3, 1fr); }
     }
   </style>
 </head>
 <body>
 
-<!-- ══════════════════════════════════════
-     BLOCK 1 · 整体数据展示
-══════════════════════════════════════ -->
+<!-- ══ BLOCK 1 · 整体数据概览 ══ -->
 <div class="panel" id="overviewPanel">
   <div class="overview-header">
     <div class="section-title" style="margin-bottom:0">整体数据概览</div>
@@ -317,15 +197,10 @@
       <button class="btn btn-success btn-sm" id="saveOverviewBtn" style="display:none" onclick="saveOverview()">保存</button>
     </div>
   </div>
-
-  <div class="cards-grid" id="cardsGrid">
-    <!-- Cards injected by JS -->
-  </div>
+  <div class="cards-grid" id="cardsGrid"></div>
 </div>
 
-<!-- ══════════════════════════════════════
-     BLOCK 2 · Tab 折线图
-══════════════════════════════════════ -->
+<!-- ══ BLOCK 2 · Tab 折线图 ══ -->
 <div class="panel">
   <div class="tab-header">
     <div class="tabs">
@@ -336,24 +211,39 @@
     <button class="btn btn-outline btn-sm" onclick="openEditModal()">✏ 编辑</button>
   </div>
 
+  <!-- 帖子 -->
   <div class="tab-content active" id="tab-posts">
+    <div class="axis-labels-row">
+      <div class="axis-label-left">← 进审率（%）</div>
+      <div class="axis-label-right">审出率（%） →</div>
+    </div>
     <div class="chart-wrap"><canvas id="chartPosts"></canvas></div>
   </div>
+
+  <!-- 评论 -->
   <div class="tab-content" id="tab-comments">
+    <div class="axis-labels-row">
+      <div class="axis-label-left">← 进审率（%）</div>
+      <div class="axis-label-right">审出率（%） →</div>
+    </div>
     <div class="chart-wrap"><canvas id="chartComments"></canvas></div>
   </div>
+
+  <!-- 用户信息审核 -->
   <div class="tab-content" id="tab-users">
+    <div class="axis-labels-row">
+      <div class="axis-label-left">← 进审量级（条）</div>
+      <div class="axis-label-right">审出率（%） →</div>
+    </div>
     <div class="chart-wrap"><canvas id="chartUsers"></canvas></div>
   </div>
 </div>
 
-<!-- ══════════════════════════════════════
-     EDIT MODAL · 折线图数据编辑
-══════════════════════════════════════ -->
+<!-- ══ EDIT MODAL ══ -->
 <div class="modal-overlay" id="editModal">
   <div class="modal">
     <div class="modal-title" id="modalTitle">编辑数据</div>
-    <div class="modal-hint">请填写 1 月 ~ 6 月的数据值（每月一个数字）</div>
+    <div class="modal-hint">填写 1 月 ~ 6 月的数值，百分比请直接填数字（如 15 代表 15%）</div>
     <div id="modalFields"></div>
     <div class="modal-footer">
       <button class="btn btn-outline" onclick="closeEditModal()">取消</button>
@@ -363,44 +253,45 @@
 </div>
 
 <script>
-/* ══════════════════════════════════════
-   STATE
-══════════════════════════════════════ */
 const MONTHS = ['1月','2月','3月','4月','5月','6月'];
 
-// Overview cards data
+/* ── 概览卡片数据 ── */
 let overviewCards = [
-  { label: '累计帖子数',   value: '128,450', unit: '篇',  trend: '↑ 12.3%', trendType: 'up' },
-  { label: '累计评论数',   value: '3,204,800', unit: '条', trend: '↑ 8.7%',  trendType: 'up' },
-  { label: '注册用户数',   value: '56,320',  unit: '人',  trend: '↑ 5.1%',  trendType: 'up' },
-  { label: '待审核帖子',   value: '1,240',   unit: '篇',  trend: '↓ 3.2%',  trendType: 'down' },
-  { label: '审核通过率',   value: '94.6',    unit: '%',   trend: '↑ 1.2%',  trendType: 'up' },
-  { label: '日活用户',     value: '8,930',   unit: '人',  trend: '↑ 6.8%',  trendType: 'up' },
+  { label: '累计帖子数',   value: '128,450',   unit: '篇', trend: '↑ 12.3%', trendType: 'up'   },
+  { label: '累计评论数',   value: '3,204,800', unit: '条', trend: '↑ 8.7%',  trendType: 'up'   },
+  { label: '注册用户数',   value: '56,320',    unit: '人', trend: '↑ 5.1%',  trendType: 'up'   },
+  { label: '待审核帖子',   value: '1,240',     unit: '篇', trend: '↓ 3.2%',  trendType: 'down' },
+  { label: '审核通过率',   value: '94.6',      unit: '%',  trend: '↑ 1.2%',  trendType: 'up'   },
+  { label: '日活用户',     value: '8,930',     unit: '人', trend: '↑ 6.8%',  trendType: 'up'   },
 ];
 
-// Chart datasets
+/* ── 折线图数据
+   posts / comments:  进审率(%, 左轴 0-20) + 审出率(%, 右轴 0-40)
+   users:             进审量级(条, 左轴 1000-5000) + 审出率(%, 右轴 0-5)
+── */
 let chartData = {
   posts: {
     title: '帖子',
+    type: 'rate',   // 双百分比
     series: [
-      { label: '发帖量',   color: '#4f6ef7', data: [8200, 9500, 11200, 10800, 13400, 15600] },
-      { label: '审核通过', color: '#43a047', data: [7800, 9000, 10600, 10200, 12700, 14800] },
-      { label: '审核拒绝', color: '#ef5350', data: [400,  500,  600,   600,   700,   800]   },
+      { label: '进审率', yAxis: 'left',  color: '#4f6ef7', data: [8.2,  10.5, 13.1, 11.8, 15.3, 17.6] },
+      { label: '审出率', yAxis: 'right', color: '#ef5350', data: [18.4, 22.0, 28.5, 25.6, 33.2, 37.8] },
     ]
   },
   comments: {
     title: '评论',
+    type: 'rate',
     series: [
-      { label: '新增评论', color: '#4f6ef7', data: [42000, 48000, 55000, 52000, 61000, 73000] },
-      { label: '违规评论', color: '#ef5350', data: [1200,  1400,  1600,  1500,  1800,  2100]  },
+      { label: '进审率', yAxis: 'left',  color: '#4f6ef7', data: [6.5,  8.0,  10.2, 9.4,  12.1, 14.8] },
+      { label: '审出率', yAxis: 'right', color: '#ef5350', data: [15.2, 19.5, 24.8, 22.3, 30.1, 35.6] },
     ]
   },
   users: {
     title: '用户信息审核',
+    type: 'mixed',  // 左轴量级，右轴百分比
     series: [
-      { label: '提交审核', color: '#4f6ef7', data: [3200, 3800, 4500, 4200, 5100, 6000] },
-      { label: '审核通过', color: '#43a047', data: [3000, 3600, 4300, 4000, 4900, 5700] },
-      { label: '审核拒绝', color: '#ef5350', data: [200,  200,  200,  200,  200,  300]  },
+      { label: '进审量级', yAxis: 'left',  color: '#4f6ef7', data: [1200, 1850, 2600, 2300, 3800, 4500] },
+      { label: '审出率',   yAxis: 'right', color: '#ef5350', data: [1.2,  2.0,  3.1,  2.8,  4.0,  4.7]  },
     ]
   }
 };
@@ -409,9 +300,9 @@ let charts = {};
 let currentTab = 'posts';
 let overviewEditing = false;
 
-/* ══════════════════════════════════════
+/* ════════════════════════
    OVERVIEW CARDS
-══════════════════════════════════════ */
+════════════════════════ */
 function renderCards() {
   const grid = document.getElementById('cardsGrid');
   grid.innerHTML = '';
@@ -432,11 +323,10 @@ function renderCards() {
         <input class="card-unit-input" value="${c.unit}" placeholder="单位" />
       </div>
       <span class="card-trend trend-${c.trendType}">${c.trend}</span>
-      <input class="card-trend-input" value="${c.trend}" placeholder="趋势文字，如 ↑ 5%" />
+      <input class="card-trend-input" value="${c.trend}" placeholder="趋势，如 ↑ 5%" />
     `;
     grid.appendChild(div);
   });
-
   if (overviewEditing) {
     const addBtn = document.createElement('div');
     addBtn.className = 'card-add-btn';
@@ -458,18 +348,13 @@ function saveOverview() {
   const cards = document.querySelectorAll('#cardsGrid .card');
   overviewCards = [];
   cards.forEach(card => {
-    const labelInput = card.querySelector('.card-label-input');
-    const valueInput = card.querySelector('.card-edit-input');
-    const unitInput  = card.querySelector('.card-unit-input');
-    const trendInput = card.querySelector('.card-trend-input');
-    const trendVal   = trendInput.value.trim();
-    const trendType  = trendVal.startsWith('↓') ? 'down' : 'up';
+    const trendVal = card.querySelector('.card-trend-input').value.trim();
     overviewCards.push({
-      label: labelInput.value.trim() || '指标',
-      value: valueInput.value.trim() || '0',
-      unit:  unitInput.value.trim(),
-      trend: trendVal,
-      trendType
+      label:     card.querySelector('.card-label-input').value.trim() || '指标',
+      value:     card.querySelector('.card-edit-input').value.trim()  || '0',
+      unit:      card.querySelector('.card-unit-input').value.trim(),
+      trend:     trendVal,
+      trendType: trendVal.startsWith('↓') ? 'down' : 'up'
     });
   });
   overviewEditing = false;
@@ -482,24 +367,70 @@ function addCard() {
   overviewCards.push({ label: '新指标', value: '0', unit: '', trend: '↑ 0%', trendType: 'up' });
   renderCards();
 }
-
 function removeCard(i) {
   overviewCards.splice(i, 1);
   renderCards();
 }
 
-/* ══════════════════════════════════════
-   CHART
-══════════════════════════════════════ */
+/* ════════════════════════
+   CHART BUILD
+════════════════════════ */
+function getScalesConfig(tabKey) {
+  const d = chartData[tabKey];
+  const isMixed = d.type === 'mixed';
+
+  const leftLabel = isMixed ? '进审量级（条）' : '进审率（%）';
+  const rightLabel = '审出率（%）';
+
+  const leftMax  = isMixed ? 6000  : 25;
+  const rightMax = isMixed ? 6     : 45;
+  const leftMin  = isMixed ? 0     : 0;
+  const rightMin = 0;
+
+  return {
+    x: {
+      grid: { color: '#f0f2f8' },
+      ticks: { font: { size: 12 } }
+    },
+    yLeft: {
+      type: 'linear',
+      position: 'left',
+      min: leftMin,
+      max: leftMax,
+      grid: { color: '#f0f2f8' },
+      ticks: {
+        font: { size: 11 },
+        color: '#4f6ef7',
+        callback: v => isMixed ? v.toLocaleString() : v + '%'
+      },
+      title: { display: false }
+    },
+    yRight: {
+      type: 'linear',
+      position: 'right',
+      min: rightMin,
+      max: rightMax,
+      grid: { drawOnChartArea: false },
+      ticks: {
+        font: { size: 11 },
+        color: '#ef5350',
+        callback: v => v + '%'
+      },
+      title: { display: false }
+    }
+  };
+}
+
 function buildChart(canvasId, tabKey) {
   const ctx = document.getElementById(canvasId).getContext('2d');
-  const data = chartData[tabKey];
+  const d = chartData[tabKey];
   if (charts[tabKey]) { charts[tabKey].destroy(); }
+
   charts[tabKey] = new Chart(ctx, {
     type: 'line',
     data: {
       labels: MONTHS,
-      datasets: data.series.map(s => ({
+      datasets: d.series.map(s => ({
         label: s.label,
         data: s.data,
         borderColor: s.color,
@@ -509,6 +440,7 @@ function buildChart(canvasId, tabKey) {
         pointHoverRadius: 6,
         tension: 0.35,
         fill: false,
+        yAxisID: s.yAxis === 'left' ? 'yLeft' : 'yRight',
       }))
     },
     options: {
@@ -519,19 +451,21 @@ function buildChart(canvasId, tabKey) {
           position: 'top',
           labels: { font: { size: 12 }, boxWidth: 12, padding: 16 }
         },
-        tooltip: { mode: 'index', intersect: false }
-      },
-      scales: {
-        x: {
-          grid: { color: '#f0f2f8' },
-          ticks: { font: { size: 12 } }
-        },
-        y: {
-          grid: { color: '#f0f2f8' },
-          ticks: { font: { size: 12 } },
-          beginAtZero: false
+        tooltip: {
+          mode: 'index',
+          intersect: false,
+          callbacks: {
+            label: ctx => {
+              const s = chartData[tabKey].series[ctx.datasetIndex];
+              const isMixed = chartData[tabKey].type === 'mixed';
+              const isLeft  = s.yAxis === 'left';
+              const suffix  = (isMixed && isLeft) ? ' 条' : '%';
+              return ` ${s.label}: ${ctx.parsed.y}${suffix}`;
+            }
+          }
         }
       },
+      scales: getScalesConfig(tabKey),
       interaction: { mode: 'nearest', axis: 'x', intersect: false }
     }
   });
@@ -551,35 +485,36 @@ function switchTab(key, btn) {
   document.getElementById('tab-' + key).classList.add('active');
 }
 
-/* ══════════════════════════════════════
+/* ════════════════════════
    EDIT MODAL
-══════════════════════════════════════ */
+════════════════════════ */
 function openEditModal() {
-  const data = chartData[currentTab];
-  document.getElementById('modalTitle').textContent = `编辑「${data.title}」折线图数据`;
-  const fields = document.getElementById('modalFields');
-  fields.innerHTML = '';
+  const d = chartData[currentTab];
+  const isMixed = d.type === 'mixed';
+  document.getElementById('modalTitle').textContent = `编辑「${d.title}」折线图数据`;
+  document.getElementById('modalFields').innerHTML = '';
 
-  data.series.forEach((s, si) => {
+  d.series.forEach((s, si) => {
+    const isLeft  = s.yAxis === 'left';
+    const hint    = isMixed && isLeft ? '（单位：条）' : '（单位：%，直接填数字）';
     const heading = document.createElement('div');
-    heading.style.cssText = 'font-size:13px;font-weight:600;color:#333;margin:14px 0 8px;display:flex;align-items:center;gap:8px';
-    heading.innerHTML = `<span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:${s.color}"></span>${s.label}`;
-    fields.appendChild(heading);
+    heading.className = 'modal-series-title';
+    heading.innerHTML = `<span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:${s.color}"></span>${s.label} <span style="font-size:11px;color:#aaa;font-weight:400">${hint}</span>`;
+    document.getElementById('modalFields').appendChild(heading);
 
-    const row = document.createElement('div');
-    row.style.cssText = 'display:grid;grid-template-columns:repeat(6,1fr);gap:8px';
+    const grid = document.createElement('div');
+    grid.className = 'modal-months-grid';
     MONTHS.forEach((m, mi) => {
-      const wrap = document.createElement('div');
-      wrap.style.cssText = 'display:flex;flex-direction:column;gap:3px';
-      wrap.innerHTML = `
-        <label style="font-size:11px;color:#aaa;text-align:center">${m}</label>
-        <input type="number" id="inp_${si}_${mi}" value="${s.data[mi]}"
-          style="padding:6px 4px;border:1px solid #dde1f0;border-radius:6px;font-size:13px;text-align:center;outline:none;width:100%"
+      const cell = document.createElement('div');
+      cell.className = 'modal-month-cell';
+      cell.innerHTML = `
+        <label>${m}</label>
+        <input type="number" id="inp_${si}_${mi}" value="${s.data[mi]}" step="0.1"
           onfocus="this.style.borderColor='#4f6ef7'" onblur="this.style.borderColor='#dde1f0'" />
       `;
-      row.appendChild(wrap);
+      grid.appendChild(cell);
     });
-    fields.appendChild(row);
+    document.getElementById('modalFields').appendChild(grid);
   });
 
   document.getElementById('editModal').classList.add('open');
@@ -590,11 +525,11 @@ function closeEditModal() {
 }
 
 function applyEditModal() {
-  const data = chartData[currentTab];
-  data.series.forEach((s, si) => {
+  const d = chartData[currentTab];
+  d.series.forEach((s, si) => {
     MONTHS.forEach((_, mi) => {
-      const val = parseFloat(document.getElementById(`inp_${si}_${mi}`).value);
-      s.data[mi] = isNaN(val) ? 0 : val;
+      const v = parseFloat(document.getElementById(`inp_${si}_${mi}`).value);
+      s.data[mi] = isNaN(v) ? 0 : v;
     });
   });
   const canvasMap = { posts: 'chartPosts', comments: 'chartComments', users: 'chartUsers' };
@@ -602,14 +537,13 @@ function applyEditModal() {
   closeEditModal();
 }
 
-// Close modal on overlay click
 document.getElementById('editModal').addEventListener('click', function(e) {
   if (e.target === this) closeEditModal();
 });
 
-/* ══════════════════════════════════════
+/* ════════════════════════
    INIT
-══════════════════════════════════════ */
+════════════════════════ */
 renderCards();
 initCharts();
 </script>
