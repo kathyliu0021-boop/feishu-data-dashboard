@@ -273,7 +273,8 @@ let overviewCards = [
 let chartData = {
   posts: {
     title: '帖子',
-    type: 'rate',   // 双百分比
+    type: 'rate',
+    leftMax: 25, rightMax: 45, leftMin: 0,
     series: [
       { label: '进审率', yAxis: 'left',  color: '#4f6ef7', data: [8.2,  10.5, 13.1, 11.8, 15.3, 17.6] },
       { label: '审出率', yAxis: 'right', color: '#ef5350', data: [18.4, 22.0, 28.5, 25.6, 33.2, 37.8] },
@@ -282,6 +283,7 @@ let chartData = {
   comments: {
     title: '评论',
     type: 'rate',
+    leftMax: 12, rightMax: 28, leftMin: 0,
     series: [
       { label: '进审率', yAxis: 'left',  color: '#4f6ef7', data: [3.2,  4.5,  6.8,  5.9,  7.4,  9.1] },
       { label: '审出率', yAxis: 'right', color: '#ef5350', data: [8.5,  11.2, 15.6, 13.8, 18.4, 22.3] },
@@ -289,7 +291,8 @@ let chartData = {
   },
   users: {
     title: '用户信息审核',
-    type: 'mixed',  // 左轴量级，右轴百分比
+    type: 'mixed',
+    leftMax: 15000, rightMax: 6, leftMin: 1000,
     series: [
       { label: '进审量级', yAxis: 'left',  color: '#4f6ef7', data: [1500, 3200, 6800, 5400, 9800, 13500] },
       { label: '审出率',   yAxis: 'right', color: '#ef5350', data: [1.2,  2.0,  3.1,  2.8,  4.0,  4.7]  },
@@ -383,10 +386,9 @@ function getScalesConfig(tabKey) {
   const leftLabel = isMixed ? '进审量级（条）' : '进审率（%）';
   const rightLabel = '审出率（%）';
 
-  const isComments = tabKey === 'comments';
-  const leftMax  = isMixed ? 15000 : (isComments ? 12 : 25);
-  const rightMax = isMixed ? 6     : (isComments ? 28 : 45);
-  const leftMin  = isMixed ? 1000  : 0;
+  const leftMax  = d.leftMax;
+  const rightMax = d.rightMax;
+  const leftMin  = d.leftMin;
   const rightMin = 0;
 
   return {
