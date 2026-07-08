@@ -266,8 +266,9 @@ let overviewCards = [
 ];
 
 /* ── 折线图数据
-   posts / comments:  进审率(%, 左轴 0-20) + 审出率(%, 右轴 0-40)
-   users:             进审量级(条, 左轴 1000-5000) + 审出率(%, 右轴 0-5)
+   posts:     进审率(%, 左轴 0-20) + 审出率(%, 右轴 0-40)
+   comments: 进审率(%, 左轴 0-10) + 审出率(%, 右轴 0-25)
+   users:    进审量级(条, 左轴 1000-15000) + 审出率(%, 右轴 0-5)
 ── */
 let chartData = {
   posts: {
@@ -282,15 +283,15 @@ let chartData = {
     title: '评论',
     type: 'rate',
     series: [
-      { label: '进审率', yAxis: 'left',  color: '#4f6ef7', data: [6.5,  8.0,  10.2, 9.4,  12.1, 14.8] },
-      { label: '审出率', yAxis: 'right', color: '#ef5350', data: [15.2, 19.5, 24.8, 22.3, 30.1, 35.6] },
+      { label: '进审率', yAxis: 'left',  color: '#4f6ef7', data: [3.2,  4.5,  6.8,  5.9,  7.4,  9.1] },
+      { label: '审出率', yAxis: 'right', color: '#ef5350', data: [8.5,  11.2, 15.6, 13.8, 18.4, 22.3] },
     ]
   },
   users: {
     title: '用户信息审核',
     type: 'mixed',  // 左轴量级，右轴百分比
     series: [
-      { label: '进审量级', yAxis: 'left',  color: '#4f6ef7', data: [1200, 1850, 2600, 2300, 3800, 4500] },
+      { label: '进审量级', yAxis: 'left',  color: '#4f6ef7', data: [1500, 3200, 6800, 5400, 9800, 13500] },
       { label: '审出率',   yAxis: 'right', color: '#ef5350', data: [1.2,  2.0,  3.1,  2.8,  4.0,  4.7]  },
     ]
   }
@@ -382,9 +383,10 @@ function getScalesConfig(tabKey) {
   const leftLabel = isMixed ? '进审量级（条）' : '进审率（%）';
   const rightLabel = '审出率（%）';
 
-  const leftMax  = isMixed ? 6000  : 25;
-  const rightMax = isMixed ? 6     : 45;
-  const leftMin  = isMixed ? 0     : 0;
+  const isComments = tabKey === 'comments';
+  const leftMax  = isMixed ? 15000 : (isComments ? 12 : 25);
+  const rightMax = isMixed ? 6     : (isComments ? 28 : 45);
+  const leftMin  = isMixed ? 1000  : 0;
   const rightMin = 0;
 
   return {
