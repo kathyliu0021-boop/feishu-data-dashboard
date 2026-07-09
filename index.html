@@ -482,22 +482,33 @@ const phaseBackgroundPlugin = {
     // P03: 4月~5月初 → index 2.5~3.5
     // P04: 5月~6月 → index 4~5
     const phases = [
-      { x1: 0,   x2: 1.5, color: 'rgba(79,110,247,0.10)',  label: 'P01 准备',   labelColor: '#4f6ef7' },
-      { x1: 1.5, x2: 2.8, color: 'rgba(234,88,12,0.12)',  label: 'P02 扩张',   labelColor: '#c2410c' },
-      { x1: 2.8, x2: 3.8, color: 'rgba(22,163,74,0.11)',  label: 'P03 全场景', labelColor: '#15803d' },
-      { x1: 3.8, x2: 5,   color: 'rgba(234,179,8,0.13)',  label: 'P04 国产化', labelColor: '#a16207' },
+      { x1: 0,   x2: 1.5, color: 'rgba(79,110,247,0.13)',  borderColor: 'rgba(79,110,247,0.5)',  label: 'P01 准备',   labelColor: '#4f6ef7' },
+      { x1: 1.5, x2: 2.8, color: 'rgba(234,88,12,0.15)',   borderColor: 'rgba(234,88,12,0.6)',   label: 'P02 扩张',   labelColor: '#c2410c' },
+      { x1: 2.8, x2: 3.8, color: 'rgba(22,163,74,0.13)',   borderColor: 'rgba(22,163,74,0.5)',   label: 'P03 全场景', labelColor: '#15803d' },
+      { x1: 3.8, x2: 5,   color: 'rgba(234,179,8,0.15)',   borderColor: 'rgba(180,130,0,0.5)',   label: 'P04 国产化', labelColor: '#a16207' },
     ];
 
     ctx.save();
-    phases.forEach(p => {
+    phases.forEach((p, idx) => {
       const px1 = left + p.x1 * step;
       const px2 = left + p.x2 * step;
       // 背景色
       ctx.fillStyle = p.color;
       ctx.fillRect(px1, top, px2 - px1, bottom - top);
+      // 左边界线（除第一个阶段）
+      if (idx > 0) {
+        ctx.beginPath();
+        ctx.strokeStyle = p.borderColor;
+        ctx.lineWidth = 1.5;
+        ctx.setLineDash([4, 3]);
+        ctx.moveTo(px1, top);
+        ctx.lineTo(px1, bottom);
+        ctx.stroke();
+        ctx.setLineDash([]);
+      }
       // 标签文字
       ctx.fillStyle = p.labelColor;
-      ctx.font = '11px -apple-system, PingFang SC, sans-serif';
+      ctx.font = 'bold 11px -apple-system, PingFang SC, sans-serif';
       ctx.textAlign = 'center';
       ctx.fillText(p.label, (px1 + px2) / 2, top + 14);
     });
