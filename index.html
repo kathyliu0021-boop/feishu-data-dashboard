@@ -64,17 +64,27 @@
     }
     .card:hover { box-shadow: 0 2px 10px rgba(79,110,247,.12); }
     .card-label { font-size: 12px; color: #888; margin-bottom: 6px; }
-    .card-value { font-size: 22px; font-weight: 700; color: #2c3e7a; line-height: 1.2; }
+    .card-value { font-size: 22px; font-weight: 700; line-height: 1.2; }
     .card-unit  { font-size: 12px; color: #aaa; margin-top: 2px; }
     .card-trend { font-size: 11px; margin-top: 6px; padding: 2px 6px; border-radius: 20px; display: inline-block; }
     .trend-up   { background: #e8f5e9; color: #388e3c; }
     .trend-down { background: #fce4ec; color: #c62828; }
 
+    /* color picker row */
+    .card-color-row { display: none; gap: 5px; margin-top: 8px; align-items: center; flex-wrap: wrap; }
+    .card.editing .card-color-row { display: flex; }
+    .card-color-dot {
+      width: 16px; height: 16px; border-radius: 50%; cursor: pointer;
+      border: 2px solid transparent; transition: border-color .15s; flex-shrink: 0;
+    }
+    .card-color-dot:hover { border-color: #333; }
+    .card-color-dot.active { border-color: #333; }
+
     /* card edit mode */
     .card.editing .card-value       { display: none; }
     .card.editing .card-edit-input  { display: block; }
     .card-edit-input {
-      display: none; width: 100%; font-size: 20px; font-weight: 700; color: #2c3e7a;
+      display: none; width: 100%; font-size: 20px; font-weight: 700;
       border: none; border-bottom: 2px solid #4f6ef7; background: transparent; outline: none; padding: 2px 0;
     }
     .card.editing .card-label-text  { display: none; }
@@ -255,14 +265,25 @@
 <script>
 const MONTHS = ['1月','2月','3月','4月','5月','6月'];
 
+/* 预设颜色 */
+const CARD_COLORS = [
+  { key: 'blue',   bg: '#eff6ff', border: '#bfdbfe', value: '#2563eb' },
+  { key: 'green',  bg: '#f0fdf4', border: '#bbf7d0', value: '#16a34a' },
+  { key: 'orange', bg: '#fff7ed', border: '#fed7aa', value: '#ea580c' },
+  { key: 'red',    bg: '#fff1f2', border: '#fecdd3', value: '#e11d48' },
+  { key: 'purple', bg: '#faf5ff', border: '#e9d5ff', value: '#7c3aed' },
+  { key: 'teal',   bg: '#f0fdfa', border: '#99f6e4', value: '#0d9488' },
+  { key: 'gray',   bg: '#f8fafc', border: '#e2e8f0', value: '#475569' },
+];
+
 /* ── 概览卡片数据 ── */
 let overviewCards = [
-  { label: '累计帖子数',   value: '128,450',   unit: '篇', trend: '↑ 12.3%', trendType: 'up'   },
-  { label: '累计评论数',   value: '3,204,800', unit: '条', trend: '↑ 8.7%',  trendType: 'up'   },
-  { label: '注册用户数',   value: '56,320',    unit: '人', trend: '↑ 5.1%',  trendType: 'up'   },
-  { label: '待审核帖子',   value: '1,240',     unit: '篇', trend: '↓ 3.2%',  trendType: 'down' },
-  { label: '审核通过率',   value: '94.6',      unit: '%',  trend: '↑ 1.2%',  trendType: 'up'   },
-  { label: '日活用户',     value: '8,930',     unit: '人', trend: '↑ 6.8%',  trendType: 'up'   },
+  { label: '帖子入审率（Q2末）',   value: '4.29',   unit: '%', trend: '↓ 显著下降', trendType: 'up',  color: 'blue'   },
+  { label: '评论入审率（Q2末）',   value: '1.62',   unit: '%', trend: '↓ 显著下降', trendType: 'up',  color: 'blue'   },
+  { label: '用信进审量降幅',        value: '83.37',  unit: '%', trend: '↓ AI介入后', trendType: 'up',  color: 'green'  },
+  { label: '全场景审核准确率',      value: '≥99',    unit: '%', trend: '✓ 稳定保持', trendType: 'up',  color: 'green'  },
+  { label: '国产模型覆盖率',        value: '95+',    unit: '%', trend: '↑ 6月底完成', trendType: 'up', color: 'orange' },
+  { label: '二审闭环误伤降幅',      value: '71.2',   unit: '%', trend: '62.5%→18.2%', trendType: 'up', color: 'purple' },
 ];
 
 /* ── 折线图数据
@@ -311,23 +332,31 @@ function renderCards() {
   const grid = document.getElementById('cardsGrid');
   grid.innerHTML = '';
   overviewCards.forEach((c, i) => {
+    const colorKey = c.color || 'blue';
+    const colorCfg = CARD_COLORS.find(x => x.key === colorKey) || CARD_COLORS[0];
+    const colorDotsHtml = CARD_COLORS.map(col =>
+      `<div class="card-color-dot${col.key === colorKey ? ' active' : ''}" style="background:${col.value};" title="${col.key}" onclick="setCardColor(${i},'${col.key}')"></div>`
+    ).join('');
     const div = document.createElement('div');
     div.className = 'card' + (overviewEditing ? ' editing' : '');
     div.dataset.index = i;
+    div.style.background = colorCfg.bg;
+    div.style.borderColor = colorCfg.border;
     div.innerHTML = `
       <button class="card-remove-btn" title="删除" onclick="removeCard(${i})">×</button>
       <div class="card-label">
         <span class="card-label-text">${c.label}</span>
         <input class="card-label-input" value="${c.label}" placeholder="指标名称" />
       </div>
-      <div class="card-value">${c.value}</div>
-      <input class="card-edit-input" type="text" value="${c.value}" placeholder="数值" />
+      <div class="card-value" style="color:${colorCfg.value}">${c.value}</div>
+      <input class="card-edit-input" type="text" value="${c.value}" placeholder="数值" style="color:${colorCfg.value}" />
       <div class="card-unit">
         <span class="card-unit-text">${c.unit}</span>
         <input class="card-unit-input" value="${c.unit}" placeholder="单位" />
       </div>
       <span class="card-trend trend-${c.trendType}">${c.trend}</span>
       <input class="card-trend-input" value="${c.trend}" placeholder="趋势，如 ↑ 5%" />
+      <div class="card-color-row">${colorDotsHtml}</div>
     `;
     grid.appendChild(div);
   });
@@ -348,17 +377,27 @@ function toggleOverviewEdit() {
   renderCards();
 }
 
+function setCardColor(i, colorKey) {
+  overviewCards[i].color = colorKey;
+  renderCards();
+}
+
 function saveOverview() {
   const cards = document.querySelectorAll('#cardsGrid .card');
+  const savedColors = overviewCards.map(c => c.color);
   overviewCards = [];
-  cards.forEach(card => {
+  cards.forEach((card, idx) => {
     const trendVal = card.querySelector('.card-trend-input').value.trim();
+    // read active color dot
+    const activeDot = card.querySelector('.card-color-dot.active');
+    const colorKey = activeDot ? activeDot.title : (savedColors[idx] || 'blue');
     overviewCards.push({
       label:     card.querySelector('.card-label-input').value.trim() || '指标',
       value:     card.querySelector('.card-edit-input').value.trim()  || '0',
       unit:      card.querySelector('.card-unit-input').value.trim(),
       trend:     trendVal,
-      trendType: trendVal.startsWith('↓') ? 'down' : 'up'
+      trendType: trendVal.startsWith('↓') ? 'down' : 'up',
+      color:     colorKey
     });
   });
   overviewEditing = false;
@@ -368,7 +407,7 @@ function saveOverview() {
 }
 
 function addCard() {
-  overviewCards.push({ label: '新指标', value: '0', unit: '', trend: '↑ 0%', trendType: 'up' });
+  overviewCards.push({ label: '新指标', value: '0', unit: '', trend: '↑ 0%', trendType: 'up', color: 'blue' });
   renderCards();
 }
 function removeCard(i) {
@@ -425,6 +464,47 @@ function getScalesConfig(tabKey) {
   };
 }
 
+// 四个阶段背景色块插件（每个 tab 通用）
+const phaseBackgroundPlugin = {
+  id: 'phaseBackground',
+  beforeDraw(chart) {
+    const { ctx, chartArea, scales } = chart;
+    if (!chartArea) return;
+    const { left, right, top, bottom } = chartArea;
+    const xScale = scales.x;
+    const totalWidth = right - left;
+    // 6 个月等分，每格宽度
+    const step = totalWidth / 5;
+
+    // 阶段定义：[起始月index(0-based), 结束月index, 颜色, 标签]
+    // P01: 1-2月 → index 0~1
+    // P02: 3月初~4月初 → index 2~2.5
+    // P03: 4月~5月初 → index 2.5~3.5
+    // P04: 5月~6月 → index 4~5
+    const phases = [
+      { x1: 0,   x2: 1.5, color: 'rgba(79,110,247,0.07)',  label: 'P01 准备',   labelColor: '#4f6ef7' },
+      { x1: 1.5, x2: 2.8, color: 'rgba(149,97,226,0.07)', label: 'P02 扩张',   labelColor: '#9561e2' },
+      { x1: 2.8, x2: 3.8, color: 'rgba(34,197,94,0.08)',  label: 'P03 全场景', labelColor: '#16a34a' },
+      { x1: 3.8, x2: 5,   color: 'rgba(249,115,22,0.07)', label: 'P04 国产化', labelColor: '#ea580c' },
+    ];
+
+    ctx.save();
+    phases.forEach(p => {
+      const px1 = left + p.x1 * step;
+      const px2 = left + p.x2 * step;
+      // 背景色
+      ctx.fillStyle = p.color;
+      ctx.fillRect(px1, top, px2 - px1, bottom - top);
+      // 标签文字
+      ctx.fillStyle = p.labelColor;
+      ctx.font = '11px -apple-system, PingFang SC, sans-serif';
+      ctx.textAlign = 'center';
+      ctx.fillText(p.label, (px1 + px2) / 2, top + 14);
+    });
+    ctx.restore();
+  }
+};
+
 function buildChart(canvasId, tabKey) {
   const ctx = document.getElementById(canvasId).getContext('2d');
   const d = chartData[tabKey];
@@ -471,7 +551,8 @@ function buildChart(canvasId, tabKey) {
       },
       scales: getScalesConfig(tabKey),
       interaction: { mode: 'nearest', axis: 'x', intersect: false }
-    }
+    },
+    plugins: [phaseBackgroundPlugin]
   });
 }
 
