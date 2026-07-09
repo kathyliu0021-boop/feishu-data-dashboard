@@ -278,12 +278,10 @@ const CARD_COLORS = [
 
 /* ── 概览卡片数据 ── */
 let overviewCards = [
-  { label: '帖子入审率（Q2末）',   value: '4.29',   unit: '%', trend: '↓ 显著下降', trendType: 'up',  color: 'blue'   },
-  { label: '评论入审率（Q2末）',   value: '1.62',   unit: '%', trend: '↓ 显著下降', trendType: 'up',  color: 'blue'   },
-  { label: '用信进审量降幅',        value: '83.37',  unit: '%', trend: '↓ AI介入后', trendType: 'up',  color: 'green'  },
-  { label: '全场景审核准确率',      value: '≥99',    unit: '%', trend: '✓ 稳定保持', trendType: 'up',  color: 'green'  },
-  { label: '国产模型覆盖率',        value: '95+',    unit: '%', trend: '↑ 6月底完成', trendType: 'up', color: 'orange' },
-  { label: '二审闭环误伤降幅',      value: '71.2',   unit: '%', trend: '62.5%→18.2%', trendType: 'up', color: 'purple' },
+  { label: '帖子入审率',   value: '4.57',   unit: '%', trend: '↓ 显著下降', trendType: 'up',  color: 'blue'   },
+  { label: '评论入审率',   value: '1.63',   unit: '%', trend: '↓ 显著下降', trendType: 'up',  color: 'blue'   },
+  { label: '用户信息降幅', value: '83.37',  unit: '%', trend: '↓ AI介入后', trendType: 'up',  color: 'green'  },
+  { label: '线上模型个数', value: '28.5',   unit: '个', trend: '↑ 持续增加', trendType: 'up',  color: 'orange' },
 ];
 
 /* ── 折线图数据
@@ -295,10 +293,10 @@ let chartData = {
   posts: {
     title: '帖子',
     type: 'rate',
-    leftMax: 25, rightMax: 45, leftMin: 0,
+    leftMax: 20, rightMax: 40, leftMin: 0,
     series: [
-      { label: '进审率', yAxis: 'left',  color: '#4f6ef7', data: [8.2,  10.5, 13.1, 11.8, 15.3, 17.6] },
-      { label: '审出率', yAxis: 'right', color: '#ef5350', data: [18.4, 22.0, 28.5, 25.6, 33.2, 37.8] },
+      { label: '进审率', yAxis: 'left',  color: '#4f6ef7', data: [11.53, 12.07, 8.43, 5.64, 4.60, 4.57] },
+      { label: '违规率', yAxis: 'right', color: '#ef5350', data: [13.32, 14.27, 21.58, 23.77, 31.75, 31.32] },
     ]
   },
   comments: {
@@ -306,8 +304,8 @@ let chartData = {
     type: 'rate',
     leftMax: 12, rightMax: 28, leftMin: 0,
     series: [
-      { label: '进审率', yAxis: 'left',  color: '#4f6ef7', data: [3.2,  4.5,  6.8,  5.9,  7.4,  9.1] },
-      { label: '审出率', yAxis: 'right', color: '#ef5350', data: [8.5,  11.2, 15.6, 13.8, 18.4, 22.3] },
+      { label: '进审率', yAxis: 'left',  color: '#4f6ef7', data: [7.45, 8.19, 8.39, 4.11, 1.64, 1.63] },
+      { label: '违规率', yAxis: 'right', color: '#ef5350', data: [5.01, 5.12, 6.60, 8.66, 19.15, 20.72] },
     ]
   },
   users: {
